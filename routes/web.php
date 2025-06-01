@@ -5,17 +5,29 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenugasanController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    if (!Auth::check()) {
+        return redirect()->route('login');
+    }
+
+    $role = Auth::user()->role;
+
+    if ($role === 'admin') {
+        return redirect()->route('admin.dashboard');
+    } elseif ($role === 'kurir') {
+        return redirect()->route('kurir.dashboard');
+    }
+
+    abort(403, 'Unauthorized');
 });
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Contoh halaman role-protected
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
 
