@@ -62,14 +62,41 @@
                                     <td class="border-bottom-0">
                                         @php
                                             $badgeClass = match ($surat->status) {
-                                                0 => 'bg-secondary',
-                                                1 => 'bg-info',
-                                                2 => 'bg-warning',
-                                                3 => 'bg-success',
+                                                0 => 'bg-info',
+                                                1 => 'bg-warning',
+                                                2 => 'bg-success',
                                                 default => 'bg-dark',
                                             };
+
+                                            $modal = match ($surat->status) {
+                                                0 => '',
+                                                1 => '',
+                                                2 => ' data-bs-toggle=modal',
+                                                default => '',
+                                            };
                                         @endphp
-                                        <span class="badge {{ $badgeClass }}">{{ $surat->status_text }}</span>
+                                        <span class="badge {{ $badgeClass }}" {{ $modal }}
+                                            data-bs-target="#modalBukti{{ $surat->id }}">{{ $surat->status_text }}</span>
+                                        <div class="modal fade" id="modalBukti{{ $surat->id }}" tabindex="-1"
+                                            aria-labelledby="modalBuktiLabel{{ $surat->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Bukti Pengiriman</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @if ($surat->bukti_pengiriman)
+                                                            <img style="max-height: 500px;" src="{{ asset('storage/' . $surat->bukti_pengiriman) }}"
+                                                                alt="Bukti Pengiriman" class="img-fluid">
+                                                        @else
+                                                            <p>Tidak ada bukti pengiriman.</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td class="border-bottom-0">
                                         <div class="d-flex gap-1">

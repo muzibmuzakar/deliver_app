@@ -131,7 +131,8 @@ class SuratController extends Controller
         $surat = Surat::findOrFail($id);
 
         if ($request->hasFile('bukti_pengiriman')) {
-            $path = $request->file('bukti_pengiriman')->store('bukti_pengiriman', 'public');
+            $filename = $surat->no_resi . '.' . $request->file('bukti_pengiriman')->getClientOriginalExtension();
+            $path = $request->file('bukti_pengiriman')->storeAs('bukti_pengiriman', $filename, 'public');
             $surat->bukti_pengiriman = $path;
         }
 
