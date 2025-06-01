@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modernize Free</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
+    <title>Deliver App</title>
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.2.3/css/buttons.dataTables.css">
@@ -23,8 +22,14 @@
             <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="./index.html" class="text-nowrap logo-img">
-                        <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
+                    @if (Auth::user()->role === 'admin')
+                    <a class="text-nowrap logo-img" href="{{ route('admin.dashboard') }}">
+                    @else
+                    <a class="text-nowrap logo-img" href="{{ route('kurir.dashboard') }}">
+                    @endif
+                        {{-- <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" /> --}}
+                        
+                        <h4 class="hide-menu">LOGO</h4>
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>
