@@ -67,7 +67,7 @@ class SuratController extends Controller
     public function show(string $id)
     {
         $surat = Surat::with(['kurir', 'seksi'])->findOrFail($id);
-        return view('dashboard.surat.show', compact('surat'));
+        return view('dashboard.surat.detail', compact('surat'));
     }
 
     public function edit(string $id)

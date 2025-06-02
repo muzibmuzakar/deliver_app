@@ -45,13 +45,18 @@
                                         <p class="mb-0 fw-normal">{{ $no++ }}</p>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{ $surat->no_resi }}</p>
+                                        <a href="{{ route('surat.show', $surat->id) }}" style="color: #5A6A85;">
+                                            <p class="mb-0 fw-semibold">{{ $surat->no_resi }}</p>
+                                        </a>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="fw-semibold mb-1">{{ $surat->kepada }}</p>
+                                        <a href="{{ route('surat.show', $surat->id) }}" style="color: #5A6A85;">
+                                            <p class="fw-semibold mb-1">{{ $surat->kepada }}</p>
+                                        </a>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{ $surat->alamat }}</p>
+                                        <p class="mb-0 fw-normal">{{ \Illuminate\Support\Str::limit($surat->alamat, 20) }}
+                                        </p>
                                     </td>
                                     <td class="border-bottom-0">
                                         <p class="mb-0 fw-normal">{{ $surat->kurir->name ?? '-' }}</p>
@@ -82,13 +87,15 @@
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Bukti Pengiriman</h1>
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Bukti Pengiriman
+                                                        </h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         @if ($surat->bukti_pengiriman)
-                                                            <img style="max-height: 500px;" src="{{ asset('storage/' . $surat->bukti_pengiriman) }}"
+                                                            <img style="max-height: 500px;"
+                                                                src="{{ asset('storage/' . $surat->bukti_pengiriman) }}"
                                                                 alt="Bukti Pengiriman" class="img-fluid">
                                                         @else
                                                             <p>Tidak ada bukti pengiriman.</p>
@@ -101,9 +108,9 @@
                                     <td class="border-bottom-0">
                                         <div class="d-flex gap-1">
                                             {{-- Tombol Show --}}
-                                            {{-- <a href="{{ route('surat.edit', $surat->id) }}" class="btn btn-sm btn-success">
+                                            <a href="{{ route('surat.show', $surat->id) }}" class="btn btn-sm btn-success">
                                                 <i class="ti ti-eye"></i>
-                                            </a> --}}
+                                            </a>
 
                                             {{-- Tombol Edit --}}
                                             <a href="{{ route('surat.edit', $surat->id) }}" class="btn btn-sm btn-warning">

@@ -118,8 +118,13 @@
                                 data-bs-popper="static">
                                 <div class="message-body">
                                     @forelse ($notifications as $notification)
-                                        <a href="{{ route('surat.index') }}"
+                                        @if (Auth::user()->role === 'admin')
+                                        <a href="{{ route('surat.show', $notification->data['surat_id']) }}"
                                             class="dropdown-item d-flex align-items-start">
+                                        @else
+                                        <a href="{{ route('penugasan.show', $notification->data['surat_id']) }}"
+                                            class="dropdown-item d-flex align-items-start">
+                                        @endif
                                             <div>
                                                 <strong>{{ $notification->data['title'] }}</strong><br>
                                                 <small>{{ $notification->data['message'] }}</small><br>

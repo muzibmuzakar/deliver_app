@@ -64,13 +64,18 @@
                                         <p class="mb-0 fw-normal">{{ $no++ }}</p>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{ $surat->no_resi }}</p>
+                                        <a href="{{ route('penugasan.show', $surat->id) }}" style="color: #5A6A85;">
+                                            <p class="mb-0 fw-semibold">{{ $surat->no_resi }}</p>
+                                        </a>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="fw-semibold mb-1">{{ $surat->kepada }}</p>
+                                        <a href="{{ route('penugasan.show', $surat->id) }}" style="color: #5A6A85;">
+                                            <p class="fw-semibold mb-1">{{ $surat->kepada }}</p>
+                                        </a>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{ $surat->alamat }}</p>
+                                        <p class="mb-0 fw-normal">{{ \Illuminate\Support\Str::limit($surat->alamat, 20) }}
+                                        </p>
                                     </td>
                                     <td class="border-bottom-0">
                                         <p class="mb-0 fw-normal">{{ $surat->seksi->nama ?? '-' }}</p>
@@ -97,7 +102,7 @@
                                         <div class="modal fade" id="modalKirim{{ $surat->id }}" tabindex="-1"
                                             aria-labelledby="modalKirimLabel{{ $surat->id }}" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
-                                                <form action="{{ route('surat.kirim', $surat->id) }}" method="POST">
+                                                <form action="{{ route('penugasan.kirim', $surat->id) }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="modal-content">
@@ -122,7 +127,7 @@
                                         <div class="modal fade" id="modalSelesai{{ $surat->id }}" tabindex="-1"
                                             aria-labelledby="modalSelesaiLabel{{ $surat->id }}" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
-                                                <form action="{{ route('surat.selesai', $surat->id) }}" method="POST"
+                                                <form action="{{ route('penugasan.selesai', $surat->id) }}" method="POST"
                                                     enctype="multipart/form-data">
                                                     @csrf
                                                     @method('PUT')

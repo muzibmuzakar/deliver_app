@@ -28,7 +28,7 @@ class SuratSelesaiNotification extends Notification
         return [
             'title' => "Update Progres",
             'message' => 'Pengiriman surat dengan resi ' . $this->surat->no_resi . ' telah selesai oleh kurir ' . $this->surat->kurir->name,
-            'id' => $this->surat->id,
+            'surat_id' => $this->surat->id,
         ];
     }
 }

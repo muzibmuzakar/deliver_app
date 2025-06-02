@@ -40,7 +40,8 @@ Route::middleware(['auth', 'role:kurir'])->group(function () {
     Route::get('/dashboard/kurir', [DashboardController::class, 'index'])->name('kurir.dashboard');
 
     Route::get('/penugasan', [PenugasanController::class, "index"])->name("penugasan.index");
+    Route::get('/penugasan/{id}', [PenugasanController::class, "show"])->name("penugasan.show");
 
-    Route::put('/surat/{id}/kirim', [SuratController::class, 'kirim'])->name('surat.kirim');
-    Route::put('/surat/{id}/selesai', [SuratController::class, 'selesai'])->name('surat.selesai');
+    Route::put('/surat/{id}/kirim', [SuratController::class, 'kirim'])->name('penugasan.kirim');
+    Route::put('/surat/{id}/selesai', [SuratController::class, 'selesai'])->name('penugasan.selesai');
 });

@@ -14,4 +14,10 @@ class PenugasanController extends Controller
 
         return view('dashboard.penugasan.index', compact('surats'));
     }
+
+    public function show(string $id)
+    {
+        $surat = Surat::with(['kurir', 'seksi'])->findOrFail($id);
+        return view('dashboard.penugasan.detail', compact('surat'));
+    }
 }
